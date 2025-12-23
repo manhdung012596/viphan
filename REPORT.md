@@ -76,9 +76,24 @@ Chúng ta giải phương trình sau để kiểm chứng:
 - **RK4** cho kết quả gần như trùng khớp hoàn toàn (sai số ~0.0001).
 
 ### 3.3. Biểu đồ so sánh
-Hình ảnh dưới đây minh họa đường đi của các nghiệm xấp xỉ:
+#### a) Tổng hợp (Comparison)
+Hình ảnh dưới đây minh họa đường đi của các nghiệm xấp xỉ so với nghiệm chính xác:
 
 ![Comparison Plot](./comparison_plot.png)
+
+#### b) Chi tiết từng phương pháp (vs Exact Solution)
+
+**Phương pháp Euler:**
+![Euler Plot](./euler_plot.png)
+*Nhận xét: Đường xấp xỉ (đỏ) lệch xa dần so với đường chính xác (đen).*
+
+**Phương pháp Euler cải tiến:**
+![Improved Euler Plot](./improved_euler_plot.png)
+*Nhận xét: Đường xấp xỉ (xanh dương) bám sát hơn, nhưng vẫn có sai số nhỏ ở cuối.*
+
+**Phương pháp Runge-Kutta 4:**
+![RK4 Plot](./rk4_plot.png)
+*Nhận xét: Đường xấp xỉ (xanh lá) trùng khít hoàn toàn với đường chính xác.*
 
 ---
 

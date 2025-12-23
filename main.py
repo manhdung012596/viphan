@@ -68,17 +68,43 @@ def main():
     print(f"Runge-Kutta 4 Method:  {np.max(err_rk4):.6f}")
     
     # 5. Vẽ đồ thị
-    plt.figure(figsize=(10, 6))
-    
-    # Vẽ đường nghiệm chính xác (dùng nhiều điểm hơn cho mượt)
     t_smooth = np.linspace(x0, x_end, 100)
     y_smooth = exact_solution(t_smooth)
-    plt.plot(t_smooth, y_smooth, 'k-', label='Exact Solution', linewidth=1.5)
     
-    # Vẽ các điểm xấp xỉ
-    plt.plot(t_euler, y_euler, 'ro--', label=f'Euler (h={h})', markersize=4)
-    plt.plot(t_euler, y_imp_euler, 'bs--', label=f'Improved Euler (h={h})', markersize=4)
-    plt.plot(t_euler, y_rk4, 'g^--', label=f'RK4 (h={h})', markersize=4)
+    # Hàm hỗ trợ vẽ
+    def plot_method(title, t_vals, y_vals, y_exact_smooth, label, color, filename):
+        plt.figure(figsize=(8, 6))
+        plt.plot(t_smooth, y_exact_smooth, 'k-', label='Exact Solution', linewidth=1.5)
+        plt.plot(t_vals, y_vals, color, label=label, markersize=4)
+        plt.title(title)
+        plt.xlabel("t")
+        plt.ylabel("y")
+        plt.legend()
+        plt.grid(True)
+        plt.savefig(filename)
+        print(f"Da luu bieu do vao file: {filename}")
+
+    # Hình 1: Euler
+    plot_method(f"Phuong phap Euler (h={h})", 
+                t_euler, y_euler, y_smooth, 
+                f'Euler', 'ro--', "euler_plot.png")
+
+    # Hình 2: Improved Euler
+    plot_method(f"Phuong phap Euler cai tien (h={h})", 
+                t_euler, y_imp_euler, y_smooth, 
+                f'Improved Euler', 'bs--', "improved_euler_plot.png")
+
+    # Hình 3: RK4
+    plot_method(f"Phuong phap RK4 (h={h})", 
+                t_euler, y_rk4, y_smooth, 
+                f'RK4', 'g^--', "rk4_plot.png")
+
+    # Hình 4: Tổng hợp
+    plt.figure(figsize=(10, 6))
+    plt.plot(t_smooth, y_smooth, 'k-', label='Exact Solution', linewidth=1.5)
+    plt.plot(t_euler, y_euler, 'ro--', label=f'Euler', markersize=4)
+    plt.plot(t_euler, y_imp_euler, 'bs--', label=f'Improved Euler', markersize=4)
+    plt.plot(t_euler, y_rk4, 'g^--', label=f'RK4', markersize=4)
     
     plt.title(f"So sanh cac phuong phap giai phuong trinh vi phan (h={h})")
     plt.xlabel("t")
@@ -88,7 +114,8 @@ def main():
     
     plot_filename = "comparison_plot.png"
     plt.savefig(plot_filename)
-    print(f"\nDa luu bieu do vao file: {plot_filename}")
+    print(f"Da luu bieu do vao file: {plot_filename}")
+    
     plt.show()
 
 if __name__ == "__main__":
